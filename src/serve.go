@@ -34,7 +34,7 @@ func startMisc() {
 }
 
 func StartServers() {
-	log.Stdout("Starting servers")
+	log.Println("Starting servers")
 	startFileServers()
 	startPageServers()
 	startMisc()

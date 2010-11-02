@@ -41,7 +41,7 @@ func readFile(filename string) (contents string) {
 
 
 func ReadTemplate(templateDir, name string) *template.Template {
-	log.Stdout("  Reading template ", name)
+	log.Println("  Reading template ", name)
 	templatePath := path.Join(templateDir, name)
 	templateText := readFile(templatePath)
 	template, err := template.Parse(templateText, nil)
@@ -54,7 +54,7 @@ func ReadTemplate(templateDir, name string) *template.Template {
 func ReadTemplates(templateDir string) {
 	Templates = make(map[string]*template.Template)
 	// read the templates
-	log.Stdout("Reading templates")
+	log.Println("Reading templates")
 	flist, err := ioutil.ReadDir(templateDir)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "%s\n", err.String())
@@ -115,14 +115,14 @@ func (v postVisitor) VisitDir(path string, f *os.FileInfo) bool {
 func (v postVisitor) VisitFile(path string, f *os.FileInfo) {
 	// get a clean path
 	relPath := strings.Replace(path, v.root, "", 1)
-	log.Stdout("  Reading post ", relPath)
+	log.Println("  Reading post ", relPath)
 	// read in the posts
 	v.posts[relPath] = ReadPost(readFile(path), relPath)
 }
 
 // ReadPosts reads all the posts from the given directory
 func ReadPosts(postDir string) {
-	log.Stdout("Reading posts")
+	log.Println("Reading posts")
 	v := postVisitor{root: postDir, posts: make(map[string]*Post)}
 	walkDir(postDir, v)
 	Posts = v.posts
@@ -138,7 +138,7 @@ func (v pageVisitor) VisitDir(path string, f *os.FileInfo) bool { return true }
 func (v pageVisitor) VisitFile(path string, f *os.FileInfo) {
 	// get a clean path
 	relPath := strings.Replace(path, v.root, "", 1)
-	log.Stdout("  Reading page ", relPath)
+	log.Println("  Reading page ", relPath)
 	// read in the posts
 	Pages[relPath] = ReadPage(readFile(path), relPath)
 }
@@ -163,7 +163,7 @@ func ReadPage(content string, path string) *Page {
 
 // ReadPages reads all raw pages from the given directory
 func ReadPages(pageDir string) {
-	log.Stdout("Reading pages")
+	log.Println("Reading pages")
 	v := pageVisitor{pageDir}
 	walkDir(pageDir, v)
 }
@@ -187,7 +187,7 @@ func (v dataVisitor) VisitFile(path string, f *os.FileInfo) {
 
 // ReadData reads all raw data from the given directory
 func ReadData(dataDir string) {
-	log.Stdout("Reading data")
+	log.Println("Reading data")
 	v := dataVisitor{root: dataDir}
 	walkDir(dataDir, v)
 }

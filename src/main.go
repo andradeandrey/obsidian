@@ -52,14 +52,14 @@ func main() {
 	makeCategories()
 	compile.CompileAll()
 	serve.StartServers()
-	log.Stdout("Server started in ",
+	log.Println("Server started in ",
 		(time.Nanoseconds()-startTime)/1000,
 		" microseconds")
 	serve.Serve(*port)
 }
 
 func makeTags() {
-	log.Stdout("Analyzing tags")
+	log.Println("Analyzing tags")
 	for _, post := range Posts {
 		for _, tagname := range post.Tags {
 			if _, ok := Tags[tagname]; !ok {
@@ -82,7 +82,7 @@ func makeTags() {
 }
 
 func makeCategories() {
-	log.Stdout("Analyzing categories")
+	log.Println("Analyzing categories")
 	for _, post := range Posts {
 		cname := post.Category
 		if _, ok := Categories[cname]; !ok {

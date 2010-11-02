@@ -23,7 +23,7 @@ func (w *stringWriter) Write(data []uint8) (n int, err os.Error) {
 }
 
 func CompilePosts() {
-	log.Stdout("  Compiling posts")
+	log.Println("  Compiling posts")
 	// compile against the "post" template
 	tmpl := Templates["post"]
 	for _, post := range Posts {
@@ -43,7 +43,7 @@ func CompilePosts() {
 }
 
 func CompileExcerpts() {
-	log.Stdout("  Compiling post excerpts")
+	log.Println("  Compiling post excerpts")
 	// compile against the "excerpt" template
 	tmpl := Templates["excerpt"]
 	for _, post := range Posts {
@@ -56,7 +56,7 @@ func CompileExcerpts() {
 }
 
 func CompileTags() {
-	log.Stdout("  Compiling tags")
+	log.Println("  Compiling tags")
 	// compile against the "tag" template
 	tmpl := Templates["tab"]
 	for _, tag := range Tags {
@@ -70,7 +70,7 @@ func CompileTags() {
 }
 
 func CompileCategories() {
-	log.Stdout("  Compiling categories")
+	log.Println("  Compiling categories")
 	// compile against the "tag" template
 	tmpl := Templates["category"]
 	for _, cat := range Categories {
@@ -84,7 +84,7 @@ func CompileCategories() {
 }
 
 func CompileIndex() {
-	log.Stdout("  Compiling index page")
+	log.Println("  Compiling index page")
 	// compile list of all pages against the "index" template
 	tmpl := Templates["index"]
 	w := &stringWriter{}
@@ -99,7 +99,7 @@ func CompileIndex() {
 }
 
 func Compile404() {
-	log.Stdout("  Compiling 404 page")
+	log.Println("  Compiling 404 page")
 	if tmpl, ok := Templates["404"]; ok {
 		w := &stringWriter{}
 		tmpl.Execute(map[string]interface{}{
@@ -114,7 +114,7 @@ func Compile404() {
 }
 
 func CompileFull() {
-	log.Stdout("  Compiling full pages")
+	log.Println("  Compiling full pages")
 	// Compile all pages against the "gen" template
 	tmpl := Templates["gen"]
 	for _, page := range Pages {
@@ -132,7 +132,7 @@ func CompileFull() {
 }
 
 func CompileAll() {
-	log.Stdout("Compiling all")
+	log.Println("Compiling all")
 	CompilePosts()
 	CompileExcerpts()
 	CompileTags()

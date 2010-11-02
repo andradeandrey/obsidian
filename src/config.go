@@ -19,7 +19,7 @@ func asList(val string) (list []string) {
 }
 
 func ReadConfig(confFile string) {
-	log.Stdout("Reading configuration")
+	log.Println("Reading configuration")
 	content, _ := ioutil.ReadFile(confFile)
 	lines := strings.Split(string(content), "\n", -1)
 	Configuration = make(map[string]interface{})
